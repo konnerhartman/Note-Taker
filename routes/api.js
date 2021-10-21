@@ -8,13 +8,29 @@
 // module.exports = api;
 
 const api = require('express').Router();
-const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
+const { readFromFile, readAndAppend, writeToFile } = require('../helpers/fsUtils');
 const uuid = require('../helpers/uuid');
 
 // GET Route for retrieving all the tips
 api.get('/notes', (req, res) => {
   console.info(`${req.method} request received for notes`);
   readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+});
+
+api.delete('/notes/:note_id', (req, res) => {
+    const noteId = req.params.note_id;
+    readFromFile('./db/db.json')
+      .then((data) => JSON.parse(data))
+      .then((json) => {
+        // Make a new array of all tips except the one with the ID provided in the URL
+        const result = json.filter((note) => note.note_id !== noteId);
+  
+        // Save that array to the filesystem
+        writeToFile('./db/db.json', result);
+  
+        // Respond to the DELETE request
+        res.json(`Item ${noteId} has been deleted 🗑️`);
+      });
 });
 
 // POST Route for a new UX/UI tip
