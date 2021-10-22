@@ -23,6 +23,7 @@
   - [License](#license)
   - [Credits](#credits)
   - [Links](#links)
+  - [Screencaptures](#screencaptures)
   - [Tests](#tests)
   - [Questions](#questions)
   
@@ -36,11 +37,22 @@
   MIT
   
   ## Credits
-  
+  Konner Hartman (myself)
+   <br/>
+  www.stackoverflow.com
+   <br/>
+  BCS Learning Assistance
 
   ## Links
+  Repository:
   https://github.com/konnerhartman/Note-Taker
+  <br/>
+  Heroku Link:
+  https://shielded-hollows-62643.herokuapp.com/
   
+  ## Screencaptures
+  ![Gif](./public/assets/images/Note_Taker.gif)
+
   ## Tests
   There are no tests.
   
