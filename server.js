@@ -1,31 +1,13 @@
-// const express = require('express');
-// const path = require('path');
-// const PORT = 3001;
-
-// const htmlRouter = require('./routes/html.js');
-// const notesRouter = require('./routes/notes.js');
-
-
-// const app = express();
-
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-// app.use(express.static('public'));
-
-// app.use('./routes/html', htmlRouter);
-// app.use('./routes/notes', notesRouter);
-
-
-// app.listen(PORT, () => 
-//   console.info(`Example app listening at http://localhost:${PORT}`)
-// );
-
 const express = require('express');
 const path = require('path');
 
-const PORT = 3001;
+// Applies a port number provided by HEROKU or uses local 3001
+const PORT = process.env.PORT || 3001;
 
+// Initializes Express.js
 const app = express();
+
+// Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -33,12 +15,14 @@ app.use(express.urlencoded({ extended: true }));
 const htmlRouter = require('./routes/html');
 const apiRouter = require('./routes/api');
 
+// Prefaces each path with either '/' or '/api' to direct user to correct page
 app.use('/', htmlRouter);
 app.use('/api', apiRouter);
 
 // Middleware for parsing JSON and urlencoded form data
 app.use(express.static('public'));
 
+// Opens a live server and supplies a easier to use link
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
 );

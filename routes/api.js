@@ -1,22 +1,14 @@
-// const express = require('express');
-// const noteData = require('./db/db.json');
-
-// const app = express();
-
-// app.get('/notes', (req, res) => res.json(noteData));
-
-// module.exports = api;
-
 const api = require('express').Router();
 const { readFromFile, readAndAppend, writeToFile } = require('../helpers/fsUtils');
 const uuid = require('../helpers/uuid');
 
-// GET Route for retrieving all the tips
+// GET Route for retrieving all the notes from /db/db.json
 api.get('/notes', (req, res) => {
   console.info(`${req.method} request received for notes`);
   readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
+// DELETE Route for a note
 api.delete('/notes/:id', (req, res) => {
     const noteId = req.params.id;
     readFromFile('./db/db.json')
@@ -33,7 +25,7 @@ api.delete('/notes/:id', (req, res) => {
       });
 });
 
-// POST Route for a new UX/UI tip
+// POST Route for a note
 api.post('/notes', (req, res) => {
   console.info(`${req.method} request received to add a note`);
   console.log(req.body);
